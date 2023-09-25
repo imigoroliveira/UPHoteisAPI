@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "lg7hbStcLS8uJk+HyYZA4dANy+InDXCby91fa4+nExH6PtuHHywhyDpy3E1S5O3DBV/OJPmM961aFaipiQ6Ajw==",
+  "dgSpecHash": "nKRnMYRdBXqFYxo6yGZEfY/Ti8qwtka2e71OEwVfieIigQjhbKSPURSoW9aFamBDP2InZc4hCVPikHzgrJOvag==",
   "success": true,
-  "projectFilePath": "d:\\Code\\Faculdade\\DSV - C#\\UPHoteisAPI\\UPHoteisAPI.csproj",
+  "projectFilePath": "D:\\Code\\Faculdade\\DSV - C#\\UPHoteisAPI\\UPHoteisAPI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\igorm\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\igorm\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.10\\microsoft.aspnetcore.openapi.7.0.10.nupkg.sha512",
@@ -33,8 +33,10 @@
     "C:\\Users\\igorm\\.nuget\\packages\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\igorm\\.nuget\\packages\\microsoft.openapi\\1.4.3\\microsoft.openapi.1.4.3.nupkg.sha512",
     "C:\\Users\\igorm\\.nuget\\packages\\mono.texttemplating\\2.2.1\\mono.texttemplating.2.2.1.nupkg.sha512",
+    "C:\\Users\\igorm\\.nuget\\packages\\mysqlconnector\\2.2.7\\mysqlconnector.2.2.7.nupkg.sha512",
     "C:\\Users\\igorm\\.nuget\\packages\\netstandard.library\\2.0.1\\netstandard.library.2.0.1.nupkg.sha512",
     "C:\\Users\\igorm\\.nuget\\packages\\newtonsoft.json\\10.0.1\\newtonsoft.json.10.0.1.nupkg.sha512",
+    "C:\\Users\\igorm\\.nuget\\packages\\pomelo.entityframeworkcore.mysql\\7.0.0\\pomelo.entityframeworkcore.mysql.7.0.0.nupkg.sha512",
     "C:\\Users\\igorm\\.nuget\\packages\\swashbuckle.aspnetcore\\6.5.0\\swashbuckle.aspnetcore.6.5.0.nupkg.sha512",
     "C:\\Users\\igorm\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.5.0\\swashbuckle.aspnetcore.swagger.6.5.0.nupkg.sha512",
     "C:\\Users\\igorm\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.5.0\\swashbuckle.aspnetcore.swaggergen.6.5.0.nupkg.sha512",

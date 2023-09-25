@@ -34,3 +34,13 @@ D:\Code\Faculdade\DSV - C#\UPHoteisAPI\obj\Debug\net7.0\refint\UPHoteisAPI.dll
 D:\Code\Faculdade\DSV - C#\UPHoteisAPI\obj\Debug\net7.0\UPHoteisAPI.pdb
 D:\Code\Faculdade\DSV - C#\UPHoteisAPI\obj\Debug\net7.0\UPHoteisAPI.genruntimeconfig.cache
 D:\Code\Faculdade\DSV - C#\UPHoteisAPI\obj\Debug\net7.0\ref\UPHoteisAPI.dll
+D:\Code\Faculdade\DSV - C#\UPHoteisAPI\bin\Debug\net7.0\Humanizer.dll
+D:\Code\Faculdade\DSV - C#\UPHoteisAPI\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Design.dll
+D:\Code\Faculdade\DSV - C#\UPHoteisAPI\bin\Debug\net7.0\Microsoft.EntityFrameworkCore.Relational.dll
+D:\Code\Faculdade\DSV - C#\UPHoteisAPI\bin\Debug\net7.0\dotnet-ef.dll
+D:\Code\Faculdade\DSV - C#\UPHoteisAPI\bin\Debug\net7.0\Microsoft.Extensions.DependencyModel.dll
+D:\Code\Faculdade\DSV - C#\UPHoteisAPI\bin\Debug\net7.0\Mono.TextTemplating.dll
+D:\Code\Faculdade\DSV - C#\UPHoteisAPI\bin\Debug\net7.0\MySqlConnector.dll
+D:\Code\Faculdade\DSV - C#\UPHoteisAPI\bin\Debug\net7.0\Newtonsoft.Json.dll
+D:\Code\Faculdade\DSV - C#\UPHoteisAPI\bin\Debug\net7.0\Pomelo.EntityFrameworkCore.MySql.dll
+D:\Code\Faculdade\DSV - C#\UPHoteisAPI\bin\Debug\net7.0\System.CodeDom.dll
