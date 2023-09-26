@@ -25,9 +25,6 @@ namespace UPHoteisAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<int?>("ClienteId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("longtext");
@@ -36,13 +33,14 @@ namespace UPHoteisAPI.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<string>("Telefone")
+                    b.Property<string>("Reservas")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.HasKey("Id");
+                    b.Property<int>("Telefone")
+                        .HasColumnType("int");
 
-                    b.HasIndex("ClienteId");
+                    b.HasKey("Id");
 
                     b.ToTable("Clientes");
                 });
@@ -75,18 +73,6 @@ namespace UPHoteisAPI.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Reservas");
-                });
-
-            modelBuilder.Entity("UPHoteisAPI.Models.Cliente", b =>
-                {
-                    b.HasOne("UPHoteisAPI.Models.Cliente", null)
-                        .WithMany("Reservas")
-                        .HasForeignKey("ClienteId");
-                });
-
-            modelBuilder.Entity("UPHoteisAPI.Models.Cliente", b =>
-                {
-                    b.Navigation("Reservas");
                 });
 #pragma warning restore 612, 618
         }

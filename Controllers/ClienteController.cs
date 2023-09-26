@@ -11,23 +11,23 @@ namespace API_Hotel.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class ClienteController : ControllerBase
+    public class ControladorCliente : ControllerBase
     {
         private HotelAPIDbContext _hotelAPIDbContext;
 
-        public ClienteController(HotelAPIDbContext hotelAPIDbContext)
+        public ControladorCliente(HotelAPIDbContext hotelAPIDbContext)
         {
-            _hotelAPIDbContext = hotelAPIDbContext;
+           _hotelAPIDbContext = hotelAPIDbContext;
         }
 
-        // POST: api/Cliente/cadastrar
+        // POST: api/ControladorCliente/cadastrar
         [HttpPost]
         [Route("cadastrar")]
         public async Task<ActionResult<Cliente>> Cadastrar(Cliente cliente)
         {
             if (cliente == null)
             {
-                return BadRequest("Dados do cliente inválidos.");
+                return BadRequest("Dados de cliente inválidos.");
             }
 
             await _hotelAPIDbContext.Clientes.AddAsync(cliente);
@@ -36,7 +36,7 @@ namespace API_Hotel.Controllers
             return Created("", cliente);
         }
 
-        // GET: api/Cliente/listar
+        // GET: api/ControladorCliente/listar
         [HttpGet]
         [Route("listar")]
         public async Task<ActionResult<IEnumerable<Cliente>>> Listar()
@@ -46,7 +46,7 @@ namespace API_Hotel.Controllers
             return Ok(clientes);
         }
 
-        // GET: api/Cliente/buscar/{id}
+        // GET: api/ControladorCliente/buscar/{id}
         [HttpGet]
         [Route("buscar/{id}")]
         public async Task<ActionResult<Cliente>> Buscar(int id)
@@ -61,28 +61,27 @@ namespace API_Hotel.Controllers
             return Ok(cliente);
         }
 
-        // PUT: api/Cliente/alterar
+        // PUT: api/ControladorCliente/alterar
         [HttpPut]
         [Route("alterar")]
         public async Task<ActionResult> Alterar(Cliente cliente)
         {
-            var existingCliente = await _hotelAPIDbContext.Clientes.FindAsync(cliente.Id);
+            var clienteExistente = await _hotelAPIDbContext.Clientes.FindAsync(cliente.Id);
 
-            if (existingCliente == null)
+            if (clienteExistente == null)
             {
-                return NotFound("Cliente não encontrado.");
+                return NotFound("Cliente não encontrada.");
             }
 
-            existingCliente.Nome = cliente.Nome;
-            existingCliente.Email = cliente.Email;
+            clienteExistente.Nome = cliente.Nome;
 
-            _hotelAPIDbContext.Clientes.Update(existingCliente);
+            _hotelAPIDbContext.Clientes.Update(clienteExistente);
             await _hotelAPIDbContext.SaveChangesAsync();
 
             return Ok();
         }
 
-        // DELETE: api/Cliente/excluir/{id}
+        // DELETE: api/ControladorCliente/excluir/{id}
         [HttpDelete]
         [Route("excluir/{id}")]
         public async Task<ActionResult> Excluir(int id)
@@ -91,7 +90,7 @@ namespace API_Hotel.Controllers
 
             if (cliente == null)
             {
-                return NotFound("Cliente não encontrado.");
+                return NotFound("Cliente não encontrada.");
             }
 
             _hotelAPIDbContext.Clientes.Remove(cliente);

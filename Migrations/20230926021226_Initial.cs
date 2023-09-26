@@ -25,18 +25,13 @@ namespace UPHoteisAPI.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Email = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Telefone = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ClienteId = table.Column<int>(type: "int", nullable: true)
+                    Telefone = table.Column<int>(type: "int", nullable: false),
+                    Reservas = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Clientes", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Clientes_Clientes_ClienteId",
-                        column: x => x.ClienteId,
-                        principalTable: "Clientes",
-                        principalColumn: "Id");
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -59,11 +54,6 @@ namespace UPHoteisAPI.Migrations
                     table.PrimaryKey("PK_Reservas", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Clientes_ClienteId",
-                table: "Clientes",
-                column: "ClienteId");
         }
 
         /// <inheritdoc />
