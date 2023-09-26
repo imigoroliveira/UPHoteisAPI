@@ -5,11 +5,14 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-string mysqlConnection = builder.Configuration.GetConnectionString("Default");
 
-builder.Services.AddDbContextPool<HotelAPIDbContext>(options =>
-                options.UseMySql(mysqlConnection,
-                      ServerVersion.AutoDetect(mysqlConnection)));
+var connectionMysqlString = builder.Configuration.GetConnectionString("ConnectionMysql");
+
+builder.Services.AddDbContext<HotelAPIDbContext>(option => option.UseMySql(
+    connectionMysqlString, ServerVersion.Parse("10.4.28-MariaDB")
+   )
+);
+
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
