@@ -1,93 +1,71 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using UPHoteisAPI.Data;
+﻿using Microsoft.AspNetCore.Mvc;
 using UPHoteisAPI.Models;
+using UPHoteisAPI.Services;
 
-namespace UPHoteisAPI.Controllers
+[ApiController]
+[Route("[controller]")]
+public class QuartoController : ControllerBase
 {
-    public class QuartoController : Controller
+    private QuartoService _quartoService;
+
+    public QuartoController(QuartoService quartoService)
     {
-        private HotelAPIDbContext _hotelAPIDbContext;
+        _quartoService = quartoService;
+    }
 
-        public QuartoController(HotelAPIDbContext hotelAPIDbContext)
+    [HttpPost]
+    [Route("cadastrar")]
+    public async Task<ActionResult<Hotel>> Cadastrar(Quarto quarto)
+    {
+        if (quarto == null)
         {
-            _hotelAPIDbContext = hotelAPIDbContext;
+            return BadRequest("Dados de Quartos inválidos.");
         }
 
-        [HttpPost]
-        [Route("cadastrar")]
-        public async Task<ActionResult<Hotel>> Cadastrar(Quarto quarto)
+        await _quartoService.CadastrarQuartoAsync(quarto);
+
+        return Created("", quarto);
+    }
+
+    [HttpGet]
+    [Route("listar")]
+    public async Task<ActionResult<IEnumerable<Quarto>>> Listar()
+    {
+        var quartos = await _quartoService.ListarQuartosAsync();
+
+        return Ok(quartos);
+    }
+
+    [HttpGet]
+    [Route("buscar/{id}")]
+    public async Task<ActionResult<Quarto>> Buscar(int id)
+    {
+        var quarto = await _quartoService.BuscarQuartoAsync(id);
+
+        if (quarto == null)
         {
-            if (quarto == null)
-            {
-                return BadRequest("Dados de Quartos inválidos.");
-            }
-
-            await _hotelAPIDbContext.quartos.AddAsync(quarto);
-            await _hotelAPIDbContext.SaveChangesAsync();
-
-            return Created("", quarto);
+            return NotFound();
         }
 
-        [HttpGet]
-        [Route("listar")]
-        public async Task<ActionResult<IEnumerable<Quarto>>> Listar()
-        {
-            var quartos = await _hotelAPIDbContext.quartos.ToListAsync();
+        return Ok(quarto);
+    }
 
-            return Ok(quartos);
-        }
+    [HttpPut]
+    [Route("alterar")]
+    public async Task<ActionResult> Alterar(Quarto quarto)
+    {
+        await _quartoService.AlterarQuartoAsync(quarto);
 
-        [HttpGet]
-        [Route("buscar/{id}")]
-        public async Task<ActionResult<Quarto>> Buscar(int id)
-        {
-            var quarto = await _hotelAPIDbContext.quartos.FindAsync(id);
+        return Ok();
+    }
 
-            if (quarto == null)
-            {
-                return NotFound();
-            }
+    [HttpDelete]
+    [Route("excluir/{id}")]
+    public async Task<ActionResult> Excluir(int id)
+    {
+        await _quartoService.ExcluirQuartoAsync(id);
 
-            return Ok(quarto);
-        }
+        return Ok();
 
-        [HttpPut]
-        [Route("alterar")]
-        public async Task<ActionResult> Alterar(Quarto quarto)
-        {
-            var quartoExistente = await _hotelAPIDbContext.quartos.FindAsync(quarto.Id);
-
-            if (quartoExistente == null)
-            {
-                return NotFound("Quarto não encontrado.");
-            }
-
-            quartoExistente.Numero = quarto.Numero;
-
-            _hotelAPIDbContext.quartos.Update(quartoExistente);
-            await _hotelAPIDbContext.SaveChangesAsync();
-
-            return Ok();
-        }
-
-        [HttpDelete]
-        [Route("excluir/{id}")]
-        public async Task<ActionResult> Excluir(int id)
-        {
-            var quarto = await _hotelAPIDbContext.quartos.FindAsync(id);
-
-            if (quarto == null)
-            {
-                return NotFound("Quarto não encontrado.");
-            }
-
-            _hotelAPIDbContext.quartos.Remove(quarto);
-            await _hotelAPIDbContext.SaveChangesAsync();
-
-            return Ok();
-
-        }
     }
 }

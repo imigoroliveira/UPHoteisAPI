@@ -1,103 +1,74 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using UPHoteisAPI.Data;
 using UPHoteisAPI.Models;
 
-namespace API_Hotel.Controllers
+[ApiController]
+[Route("[controller]")]
+public class ReservaController : ControllerBase
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class ControladorReservaHotel : ControllerBase
+    private ReservaService _reservaHotelService;
+
+    public ReservaController(ReservaService reservaHotelService)
     {
-        private HotelAPIDbContext _hotelAPIDbContext;
+        _reservaHotelService = reservaHotelService;
+    }
 
-        public ControladorReservaHotel(HotelAPIDbContext hotelAPIDbContext)
+    // POST: api/ReservaController/cadastrar
+    [HttpPost]
+    [Route("cadastrar")]
+    public async Task<ActionResult<Reserva>> Cadastrar(Reserva reserva)
+    {
+        if (reserva == null)
         {
-           _hotelAPIDbContext = hotelAPIDbContext;
+            return BadRequest("Dados de reserva inválidos.");
         }
 
-        // POST: api/ControladorReservaHotel/cadastrar
-        [HttpPost]
-        [Route("cadastrar")]
-        public async Task<ActionResult<Reserva>> Cadastrar(Reserva reserva)
+        await _reservaHotelService.CadastrarReservaAsync(reserva);
+
+        return Created("", reserva);
+    }
+
+    // GET: api/ReservaController/listar
+    [HttpGet]
+    [Route("listar")]
+    public async Task<ActionResult<IEnumerable<Reserva>>> Listar()
+    {
+        var reservas = await _reservaHotelService.ListarReservasAsync();
+
+        return Ok(reservas);
+    }
+
+    // GET: api/ReservaController/buscar/{id}
+    [HttpGet]
+    [Route("buscar/{id}")]
+    public async Task<ActionResult<Reserva>> Buscar(int id)
+    {
+        var reserva = await _reservaHotelService.BuscarReservaAsync(id);
+
+        if (reserva == null)
         {
-            if (reserva == null)
-            {
-                return BadRequest("Dados de reserva inválidos.");
-            }
-
-            await _hotelAPIDbContext.reservas.AddAsync(reserva);
-            await _hotelAPIDbContext.SaveChangesAsync();
-
-            return Created("", reserva);
+            return NotFound();
         }
 
-        // GET: api/ControladorReservaHotel/listar
-        [HttpGet]
-        [Route("listar")]
-        public async Task<ActionResult<IEnumerable<Reserva>>> Listar()
-        {
-            var reservas = await _hotelAPIDbContext.reservas.ToListAsync();
+        return Ok(reserva);
+    }
 
-            return Ok(reservas);
-        }
+    // PUT: api/ReservaController/alterar
+    [HttpPut]
+    [Route("alterar")]
+    public async Task<ActionResult> Alterar(Reserva reserva)
+    {
+        await _reservaHotelService.AlterarReservaAsync(reserva);
 
-        // GET: api/ControladorReservaHotel/buscar/{id}
-        [HttpGet]
-        [Route("buscar/{id}")]
-        public async Task<ActionResult<Reserva>> Buscar(int id)
-        {
-            var reserva = await _hotelAPIDbContext.reservas.FindAsync(id);
+        return Ok();
+    }
 
-            if (reserva == null)
-            {
-                return NotFound();
-            }
+    // DELETE: api/ReservaController/excluir/{id}
+    [HttpDelete]
+    [Route("excluir/{id}")]
+    public async Task<ActionResult> Excluir(int id)
+    {
+        await _reservaHotelService.ExcluirReservaAsync(id);
 
-            return Ok(reserva);
-        }
-
-        // PUT: api/ControladorReservaHotel/alterar
-        [HttpPut]
-        [Route("alterar")]
-        public async Task<ActionResult> Alterar(Reserva reserva)
-        {
-            var reservaExistente = await _hotelAPIDbContext.reservas.FindAsync(reserva.Id);
-
-            if (reservaExistente == null)
-            {
-                return NotFound("Reserva não encontrada.");
-            }
-
-            reservaExistente.Cliente = reserva.Cliente;
-            reservaExistente.CheckIn = reserva.CheckIn;
-
-            _hotelAPIDbContext.reservas.Update(reservaExistente);
-            await _hotelAPIDbContext.SaveChangesAsync();
-
-            return Ok();
-        }
-
-        // DELETE: api/ControladorReservaHotel/excluir/{id}
-        [HttpDelete]
-        [Route("excluir/{id}")]
-        public async Task<ActionResult> Excluir(int id)
-        {
-            var reserva = await _hotelAPIDbContext.reservas.FindAsync(id);
-
-            if (reserva == null)
-            {
-                return NotFound("Reserva não encontrada.");
-            }
-
-            _hotelAPIDbContext.reservas.Remove(reserva);
-            await _hotelAPIDbContext.SaveChangesAsync();
-
-            return Ok();
-        }
+        return Ok();
     }
 }

@@ -19,8 +19,6 @@ namespace UPHoteisAPI.Models
 
         [Required]
         public double PrecoDiaria { get; set; }
-
-        public List<Reserva> Reservas { get; set; }
         
     }
 }

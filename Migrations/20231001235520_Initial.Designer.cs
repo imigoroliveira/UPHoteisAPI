@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UPHoteisAPI.Data;
 
@@ -10,9 +11,11 @@ using UPHoteisAPI.Data;
 namespace UPHoteisAPI.Migrations
 {
     [DbContext(typeof(HotelAPIDbContext))]
-    partial class HotelAPIDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231001235520_Initial")]
+    partial class Initial
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -80,6 +83,9 @@ namespace UPHoteisAPI.Migrations
                     b.Property<bool>("Disponibilidade")
                         .HasColumnType("tinyint(1)");
 
+                    b.Property<int?>("HotelId")
+                        .HasColumnType("int");
+
                     b.Property<int>("Numero")
                         .HasColumnType("int");
 
@@ -90,6 +96,8 @@ namespace UPHoteisAPI.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("HotelId");
 
                     b.ToTable("quartos");
                 });
@@ -131,6 +139,13 @@ namespace UPHoteisAPI.Migrations
                     b.ToTable("reservas");
                 });
 
+            modelBuilder.Entity("UPHoteisAPI.Models.Quarto", b =>
+                {
+                    b.HasOne("UPHoteisAPI.Models.Hotel", null)
+                        .WithMany("ListaDeQuartos")
+                        .HasForeignKey("HotelId");
+                });
+
             modelBuilder.Entity("UPHoteisAPI.Models.Reserva", b =>
                 {
                     b.HasOne("UPHoteisAPI.Models.Cliente", "Cliente")
@@ -148,6 +163,11 @@ namespace UPHoteisAPI.Migrations
                     b.Navigation("Cliente");
 
                     b.Navigation("Quarto");
+                });
+
+            modelBuilder.Entity("UPHoteisAPI.Models.Hotel", b =>
+                {
+                    b.Navigation("ListaDeQuartos");
                 });
 #pragma warning restore 612, 618
         }

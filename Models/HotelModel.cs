@@ -19,7 +19,6 @@ namespace UPHoteisAPI.Models
         [Required]
         public int Estrelas { get; set; }
 
-        [Required]
-        public List<Quarto> ListaDeQuartos { get; set; }
+
     }
 }

@@ -9,6 +9,8 @@ namespace UPHoteisAPI.Models
         [Key]
         public int Id { get; set; }
 
+        public string NomeCliente { get; set; }
+
         [Required]
         public DateTime CheckIn { get; set; }
 
@@ -18,6 +20,8 @@ namespace UPHoteisAPI.Models
         public double PrecoTotal { get; set; }
 
         public int QuartoId { get; set; }
+
+        public bool EstaConfirmada { get; set; }
         public required Quarto Quarto { get; set; }
         public int ClienteId { get; set; }
         public required Cliente Cliente { get; set; }
