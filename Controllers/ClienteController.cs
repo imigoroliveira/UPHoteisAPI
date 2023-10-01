@@ -70,7 +70,7 @@ namespace API_Hotel.Controllers
 
             if (clienteExistente == null)
             {
-                return NotFound("Cliente não encontrada.");
+                return NotFound("Cliente não encontrado.");
             }
 
             clienteExistente.Nome = cliente.Nome;
@@ -90,7 +90,7 @@ namespace API_Hotel.Controllers
 
             if (cliente == null)
             {
-                return NotFound("Cliente não encontrada.");
+                return NotFound("Cliente não encontrado.");
             }
 
             _hotelAPIDbContext.clientes.Remove(cliente);

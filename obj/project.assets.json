@@ -5752,23 +5752,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\igorm\\.nuget\\packages\\": {},
+    "C:\\Users\\marce\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Code\\Faculdade\\DSV - C#\\UPHoteisAPI\\UPHoteisAPI.csproj",
+      "projectUniqueName": "C:\\_src\\UPHoteisAPI\\UPHoteisAPI.csproj",
       "projectName": "UPHoteisAPI",
-      "projectPath": "D:\\Code\\Faculdade\\DSV - C#\\UPHoteisAPI\\UPHoteisAPI.csproj",
-      "packagesPath": "C:\\Users\\igorm\\.nuget\\packages\\",
-      "outputPath": "D:\\Code\\Faculdade\\DSV - C#\\UPHoteisAPI\\obj\\",
+      "projectPath": "C:\\_src\\UPHoteisAPI\\UPHoteisAPI.csproj",
+      "packagesPath": "C:\\Users\\marce\\.nuget\\packages\\",
+      "outputPath": "C:\\_src\\UPHoteisAPI\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\igorm\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\marce\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],

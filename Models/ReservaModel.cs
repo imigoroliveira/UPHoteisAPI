@@ -10,20 +10,17 @@ namespace UPHoteisAPI.Models
         public int Id { get; set; }
 
         [Required]
-        public string NomeCliente { get; set; }
+        public DateTime CheckIn { get; set; }
 
         [Required]
-        public DateTime DataEntrada { get; set; }
+        public DateTime CheckOut { get; set; }
 
-        [Required]
-        public DateTime DataSaida { get; set; }
+        public double PrecoTotal { get; set; }
 
-        [Required]
-        public int NumeroQuarto { get; set; }
+        public int QuartoId { get; set; }
+        public required Quarto Quarto { get; set; }
+        public int ClienteId { get; set; }
+        public required Cliente Cliente { get; set; }
 
-        public decimal PrecoTotal { get; set; }
-
-        [Required]
-        public bool EstaConfirmada { get; set; }
     }
 }
