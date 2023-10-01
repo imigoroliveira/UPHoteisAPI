@@ -70,7 +70,7 @@ namespace API_Hotel.Controllers
 
             if (reservaExistente == null)
             {
-                return NotFound("Reserva não encontrada.");
+                return NotFound("Reserva não encontradas.");
             }
 
             reservaExistente.NomeCliente = reserva.NomeCliente;
