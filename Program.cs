@@ -9,7 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionMysqlString = builder.Configuration.GetConnectionString("ConnectionMysql");
 
 builder.Services.AddDbContext<HotelAPIDbContext>(option => option.UseMySql(
-    connectionMysqlString, ServerVersion.Parse("10.4.28-MariaDB")
+    connectionMysqlString, ServerVersion.Parse(" 8.0.34-0ubuntu0.22.04.1")
    )
 );
 

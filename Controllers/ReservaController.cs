@@ -30,7 +30,7 @@ namespace API_Hotel.Controllers
                 return BadRequest("Dados de reserva inválidos.");
             }
 
-            await _hotelAPIDbContext.Reservas.AddAsync(reserva);
+            await _hotelAPIDbContext.reservas.AddAsync(reserva);
             await _hotelAPIDbContext.SaveChangesAsync();
 
             return Created("", reserva);
@@ -41,7 +41,7 @@ namespace API_Hotel.Controllers
         [Route("listar")]
         public async Task<ActionResult<IEnumerable<Reserva>>> Listar()
         {
-            var reservas = await _hotelAPIDbContext.Reservas.ToListAsync();
+            var reservas = await _hotelAPIDbContext.reservas.ToListAsync();
 
             return Ok(reservas);
         }
@@ -51,7 +51,7 @@ namespace API_Hotel.Controllers
         [Route("buscar/{id}")]
         public async Task<ActionResult<Reserva>> Buscar(int id)
         {
-            var reserva = await _hotelAPIDbContext.Reservas.FindAsync(id);
+            var reserva = await _hotelAPIDbContext.reservas.FindAsync(id);
 
             if (reserva == null)
             {
@@ -66,7 +66,7 @@ namespace API_Hotel.Controllers
         [Route("alterar")]
         public async Task<ActionResult> Alterar(Reserva reserva)
         {
-            var reservaExistente = await _hotelAPIDbContext.Reservas.FindAsync(reserva.Id);
+            var reservaExistente = await _hotelAPIDbContext.reservas.FindAsync(reserva.Id);
 
             if (reservaExistente == null)
             {
@@ -76,7 +76,7 @@ namespace API_Hotel.Controllers
             reservaExistente.NomeCliente = reserva.NomeCliente;
             reservaExistente.DataEntrada = reserva.DataEntrada;
 
-            _hotelAPIDbContext.Reservas.Update(reservaExistente);
+            _hotelAPIDbContext.reservas.Update(reservaExistente);
             await _hotelAPIDbContext.SaveChangesAsync();
 
             return Ok();
@@ -87,14 +87,14 @@ namespace API_Hotel.Controllers
         [Route("excluir/{id}")]
         public async Task<ActionResult> Excluir(int id)
         {
-            var reserva = await _hotelAPIDbContext.Reservas.FindAsync(id);
+            var reserva = await _hotelAPIDbContext.reservas.FindAsync(id);
 
             if (reserva == null)
             {
                 return NotFound("Reserva não encontrada.");
             }
 
-            _hotelAPIDbContext.Reservas.Remove(reserva);
+            _hotelAPIDbContext.reservas.Remove(reserva);
             await _hotelAPIDbContext.SaveChangesAsync();
 
             return Ok();

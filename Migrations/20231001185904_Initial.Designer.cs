@@ -11,7 +11,7 @@ using UPHoteisAPI.Data;
 namespace UPHoteisAPI.Migrations
 {
     [DbContext(typeof(HotelAPIDbContext))]
-    [Migration("20230926021226_Initial")]
+    [Migration("20231001185904_Initial")]
     partial class Initial
     {
         /// <inheritdoc />

@@ -30,7 +30,7 @@ namespace API_Hotel.Controllers
                 return BadRequest("Dados de cliente inválidos.");
             }
 
-            await _hotelAPIDbContext.Clientes.AddAsync(cliente);
+            await _hotelAPIDbContext.clientes.AddAsync(cliente);
             await _hotelAPIDbContext.SaveChangesAsync();
 
             return Created("", cliente);
@@ -41,7 +41,7 @@ namespace API_Hotel.Controllers
         [Route("listar")]
         public async Task<ActionResult<IEnumerable<Cliente>>> Listar()
         {
-            var clientes = await _hotelAPIDbContext.Clientes.ToListAsync();
+            var clientes = await _hotelAPIDbContext.clientes.ToListAsync();
 
             return Ok(clientes);
         }
@@ -51,7 +51,7 @@ namespace API_Hotel.Controllers
         [Route("buscar/{id}")]
         public async Task<ActionResult<Cliente>> Buscar(int id)
         {
-            var cliente = await _hotelAPIDbContext.Clientes.FindAsync(id);
+            var cliente = await _hotelAPIDbContext.clientes.FindAsync(id);
 
             if (cliente == null)
             {
@@ -66,7 +66,7 @@ namespace API_Hotel.Controllers
         [Route("alterar")]
         public async Task<ActionResult> Alterar(Cliente cliente)
         {
-            var clienteExistente = await _hotelAPIDbContext.Clientes.FindAsync(cliente.Id);
+            var clienteExistente = await _hotelAPIDbContext.clientes.FindAsync(cliente.Id);
 
             if (clienteExistente == null)
             {
@@ -75,7 +75,7 @@ namespace API_Hotel.Controllers
 
             clienteExistente.Nome = cliente.Nome;
 
-            _hotelAPIDbContext.Clientes.Update(clienteExistente);
+            _hotelAPIDbContext.clientes.Update(clienteExistente);
             await _hotelAPIDbContext.SaveChangesAsync();
 
             return Ok();
@@ -86,14 +86,14 @@ namespace API_Hotel.Controllers
         [Route("excluir/{id}")]
         public async Task<ActionResult> Excluir(int id)
         {
-            var cliente = await _hotelAPIDbContext.Clientes.FindAsync(id);
+            var cliente = await _hotelAPIDbContext.clientes.FindAsync(id);
 
             if (cliente == null)
             {
                 return NotFound("Cliente não encontrada.");
             }
 
-            _hotelAPIDbContext.Clientes.Remove(cliente);
+            _hotelAPIDbContext.clientes.Remove(cliente);
             await _hotelAPIDbContext.SaveChangesAsync();
 
             return Ok();

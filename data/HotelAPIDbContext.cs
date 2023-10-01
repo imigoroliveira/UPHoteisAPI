@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore;
 
         }
 
-        public DbSet<Reserva> Reservas{get; set;}
+        public DbSet<Reserva> reservas{get; set;}
 
-        public DbSet<Cliente> Clientes { get; set; }
+        public DbSet<Cliente> clientes { get; set; }
 
 }
