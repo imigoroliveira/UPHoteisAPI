@@ -70,11 +70,11 @@ namespace API_Hotel.Controllers
 
             if (reservaExistente == null)
             {
-                return NotFound("Reserva não encontradas.");
+                return NotFound("Reserva não encontrada.");
             }
 
-            reservaExistente.NomeCliente = reserva.NomeCliente;
-            reservaExistente.DataEntrada = reserva.DataEntrada;
+            reservaExistente.Cliente = reserva.Cliente;
+            reservaExistente.CheckIn = reserva.CheckIn;
 
             _hotelAPIDbContext.reservas.Update(reservaExistente);
             await _hotelAPIDbContext.SaveChangesAsync();
