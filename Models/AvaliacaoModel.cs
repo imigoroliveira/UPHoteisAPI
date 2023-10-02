@@ -8,14 +8,14 @@ namespace UPHoteisAPI.Models
     {
         [Key]
         public int Id { get; set; }
-
+        [Required]
         public int ClienteId { get; set; }
-        
+        [Required]
         public int HotelId { get; set; }
-
+        [Required]
         public int Estrelas { get; set; }
-
-        public string Descricao { get; set; }
+        [Required]
+        public string? Descricao { get; set; }
 
     }
 }

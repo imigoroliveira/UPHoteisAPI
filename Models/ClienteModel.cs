@@ -10,16 +10,16 @@ namespace UPHoteisAPI.Models
         public int Id { get; set; }
 
         [Required]
-        public string Nome { get; set; }
+        public string? Nome { get; set; }
 
         [Required]
-        public string Email { get; set; }
+        public string? Email { get; set; }
 
         [Required]
         public int Telefone { get; set; }
 
         [Required]
-        public string Reservas { get; set; }
+        public string? Reservas { get; set; }
 
     }
 }

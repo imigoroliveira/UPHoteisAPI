@@ -29,13 +29,13 @@ namespace UPHoteisAPI.Services
             return await _hotelAPIDbContext.avaliacoes.FindAsync(id);
         }
 
-        public async Task AlterarAvaliacaoAsync(Cliente cliente)
+        public async Task AlterarAvaliacaoAsync(Avaliacao avaliacao)
         {
-            var avaliacaoExistente = await _hotelAPIDbContext.avaliacoes.FindAsync(cliente.Id);
+            var avaliacaoExistente = await _hotelAPIDbContext.avaliacoes.FindAsync(avaliacao.Id);
 
-            avaliacaoExistente.Id = cliente.Id;
+            avaliacaoExistente.Estrelas = avaliacao.Estrelas;
 
-            _hotelAPIDbContext.clientes.Update(avaliacaoExistente);
+            _hotelAPIDbContext.avaliacoes.Update(avaliacaoExistente);
             await _hotelAPIDbContext.SaveChangesAsync();
         }
 
@@ -43,7 +43,7 @@ namespace UPHoteisAPI.Services
         {
             var avaliacao = await _hotelAPIDbContext.avaliacoes.FindAsync(id);
 
-            _hotelAPIDbContext.clientes.Remove(avaliacao);
+            _hotelAPIDbContext.avaliacoes.Remove(avaliacao);
             await _hotelAPIDbContext.SaveChangesAsync();
         }
     }
