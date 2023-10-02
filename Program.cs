@@ -21,6 +21,8 @@ builder.Services.AddScoped <HotelService>();
 builder.Services.AddScoped <QuartoService>();
 builder.Services.AddScoped <QuartoService>();
 builder.Services.AddScoped <ReservaService>();
+builder.Services.AddScoped<AvaliacaoService>();
+
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
