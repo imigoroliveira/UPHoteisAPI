@@ -17,49 +17,49 @@ public class AvaliacaoController : ControllerBase
     // POST: api/AvaliacaoController/cadastrar
     [HttpPost]
     [Route("cadastrar")]
-    public async Task<ActionResult<Cliente>> Cadastrar(Cliente cliente)
+    public async Task<ActionResult<Avaliacao>> Cadastrar(Avaliacao avaliacao)
     {
-        if (cliente == null)
+        if (avaliacao == null)
         {
-            return BadRequest("Dados de cliente inválidos.");
+            return BadRequest("Dados de avaliação inválidos.");
         }
 
-        await _avaliacaoService.CadastrarClienteAsync(cliente);
+        await _avaliacaoService.CadastrarAvaliacaoAsync(avaliacao);
 
-        return Created("", cliente);
+        return Created("", avaliacao);
     }
 
     // GET: api/AvaliacaoController/listar
     [HttpGet]
     [Route("listar")]
-    public async Task<ActionResult<IEnumerable<Cliente>>> Listar()
+    public async Task<ActionResult<IEnumerable<Avaliacao>>> Listar()
     {
-        var clientes = await _avaliacaoService.ListarClientesAsync();
+        var avaliacoes = await _avaliacaoService.ListarAvaliacoesAsync();
 
-        return Ok(clientes);
+        return Ok(avaliacoes);
     }
 
     // GET: api/AvaliacaoController/buscar/{id}
     [HttpGet]
     [Route("buscar/{id}")]
-    public async Task<ActionResult<Cliente>> Buscar(int id)
+    public async Task<ActionResult<Avaliacao>> Buscar(int id)
     {
-        var cliente = await _avaliacaoService.BuscarClienteAsync(id);
+        var avaliacao = await _avaliacaoService.BuscarAvaliacaoAsync(id);
 
-        if (cliente == null)
+        if (avaliacao == null)
         {
             return NotFound();
         }
 
-        return Ok(cliente);
+        return Ok(avaliacao);
     }
 
     // PUT: api/AvaliacaoController/alterar
     [HttpPut]
     [Route("alterar")]
-    public async Task<ActionResult> Alterar(Cliente cliente)
+    public async Task<ActionResult> Alterar(Avaliacao avaliacao)
     {
-        await _avaliacaoService.AlterarClienteAsync(cliente);
+        await _avaliacaoService.AlterarAvaliacaoAsync(avaliacao);
 
         return Ok();
     }
@@ -69,7 +69,7 @@ public class AvaliacaoController : ControllerBase
     [Route("excluir/{id}")]
     public async Task<ActionResult> Excluir(int id)
     {
-        await _avaliacaoService.ExcluirClienteAsync(id);
+        await _avaliacaoService.ExcluirAvaliacaoAsync(id);
 
         return Ok();
     }

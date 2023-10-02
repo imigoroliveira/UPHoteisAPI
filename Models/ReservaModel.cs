@@ -9,7 +9,7 @@ namespace UPHoteisAPI.Models
         [Key]
         public int Id { get; set; }
 
-        public string NomeCliente { get; set; }
+        public string? NomeCliente { get; set; }
 
         [Required]
         public DateTime CheckIn { get; set; }
