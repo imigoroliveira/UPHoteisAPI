@@ -57,7 +57,7 @@ public class AvaliacaoController : ControllerBase
     // PUT: api/AvaliacaoController/alterar
     [HttpPut]
     [Route("alterar")]
-    public async Task<ActionResult> Alterar(AvaliacaoService avaliacao)
+    public async Task<ActionResult> Alterar(Avaliacao avaliacao)
     {
         await _avaliacaoService.AlterarAvaliacaoAsync(avaliacao);
 
