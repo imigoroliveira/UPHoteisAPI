@@ -209,11 +209,3 @@ Bem-vindo à API de Gerenciamento de Hotel! Esta API foi desenvolvida para geren
 - Execute o projeto usando `dotnet run` ou sua IDE.
 
 - Use um cliente HTTP, como o Postman, para acessar os endpoints da API e gerenciar as informações relacionadas ao hotel.
-
-## Contribuições
-
-Contribuições são bem-vindas! Se você encontrar bugs, tiver sugestões de melhorias ou quiser adicionar novos recursos, sinta-se à vontade para abrir uma issue ou enviar um pull request.
-
-## Licença
-
-Este projeto está sob a Licença MIT. Consulte o arquivo [LICENSE](LICENSE) para obter detalhes.
