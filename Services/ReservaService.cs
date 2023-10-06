@@ -14,15 +14,18 @@ public class ReservaService
     public async Task CadastrarReservaAsync(Reserva reserva)
     {
         var quarto = await _hotelAPIDbContext.quartos.FindAsync(reserva.QuartoId);
-
-        if (quarto != null)
+        if (quarto == null)
         {
-            quarto.Disponibilidade = false;
-            _hotelAPIDbContext.quartos.Update(quarto); 
+            throw new ArgumentException("O id do quarto não existe.");
         }
+
+        quarto.Disponibilidade = false;
+
         await _hotelAPIDbContext.reservas.AddAsync(reserva);
         await _hotelAPIDbContext.SaveChangesAsync();
     }
+
+
     public async Task<IEnumerable<Reserva>> ListarReservasAsync()
     {
         return await _hotelAPIDbContext.reservas.ToListAsync();
@@ -37,7 +40,6 @@ public class ReservaService
     {
         var reservaExistente = await _hotelAPIDbContext.reservas.FindAsync(reserva.Id);
 
-        reservaExistente.Cliente = reserva.Cliente;
         reservaExistente.CheckIn = reserva.CheckIn;
 
         _hotelAPIDbContext.reservas.Update(reservaExistente);

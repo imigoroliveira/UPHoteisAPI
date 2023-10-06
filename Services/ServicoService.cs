@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using UPHoteisAPI.Data;
 using UPHoteisAPI.Models;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace UPHoteisAPI.Services
 {
@@ -35,15 +37,12 @@ namespace UPHoteisAPI.Services
 
             if (servicoAtual != null)
             {
-                // Atualize os atributos do serviço conforme necessário.
-                servicoAtual.CheckIn = servico.CheckIn;
-                servicoAtual.CheckOut = servico.CheckOut;
-                servicoAtual.ValorTotal = servico.ValorTotal;
-                servicoAtual.Reservado = servico.Reservado;
-                servicoAtual.ClienteId = servico.ClienteId;
-                servicoAtual.QuartoId = servico.QuartoId;
+                // Atualize os campos do serviço conforme necessário
+                servicoAtual.Nome = servico.Nome;
+                servicoAtual.Preco = servico.Preco;
+                servicoAtual.Disponibilidade = servico.Disponibilidade;
+                servicoAtual.HorarioFuncionamento = servico.HorarioFuncionamento;
 
-                _hotelAPIDbContext.servicos.Update(servicoAtual);
                 await _hotelAPIDbContext.SaveChangesAsync();
             }
         }

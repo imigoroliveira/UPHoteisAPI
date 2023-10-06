@@ -41,7 +41,7 @@ namespace UPHoteisAPI.Services
 
             if (avaliacaoAtual != null)
             {
-                var hotelId = avaliacaoAtual.Hotel.Id;
+                var hotelId = avaliacaoAtual.HotelId;
                 AtualizarMediaEstrelas(hotelId);
             }
 

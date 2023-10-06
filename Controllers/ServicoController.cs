@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using UPHoteisAPI.Models;
 using UPHoteisAPI.Services;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 [ApiController]
 [Route("[controller]")]

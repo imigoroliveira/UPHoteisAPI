@@ -21,12 +21,13 @@ namespace UPHoteisAPI.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Cpf = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     Nome = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Email = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Telefone = table.Column<int>(type: "int", nullable: false),
-                    Reservas = table.Column<string>(type: "longtext", nullable: false)
+                    Contato = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4")
                 },
                 constraints: table =>
@@ -41,13 +42,15 @@ namespace UPHoteisAPI.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Cnpj = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     Nome = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Endereco = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Descricao = table.Column<string>(type: "longtext", nullable: false)
+                    Contato = table.Column<string>(type: "longtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Estrelas = table.Column<int>(type: "int", nullable: false)
+                    MediaEstrelas = table.Column<double>(type: "double", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -61,20 +64,16 @@ namespace UPHoteisAPI.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Disponibilidade = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    QuantidadePessoas = table.Column<int>(type: "int", nullable: false),
                     Numero = table.Column<int>(type: "int", nullable: false),
-                    PrecoDiaria = table.Column<double>(type: "double", nullable: false),
-                    HotelId = table.Column<int>(type: "int", nullable: true)
+                    Descricao = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    ValorDiaria = table.Column<double>(type: "double", nullable: false),
+                    Disponibilidade = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    HotelId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_quartos", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_quartos_hoteis_HotelId",
-                        column: x => x.HotelId,
-                        principalTable: "hoteis",
-                        principalColumn: "Id");
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -84,60 +83,84 @@ namespace UPHoteisAPI.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    NomeCliente = table.Column<string>(type: "longtext", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
                     CheckIn = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     CheckOut = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    PrecoTotal = table.Column<double>(type: "double", nullable: false),
-                    QuartoId = table.Column<int>(type: "int", nullable: false),
-                    EstaConfirmada = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    ClienteId = table.Column<int>(type: "int", nullable: false)
+                    ValorTotal = table.Column<double>(type: "double", nullable: false),
+                    ClienteId = table.Column<int>(type: "int", nullable: false),
+                    QuartoId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_reservas", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "servicos",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Nome = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Preco = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
+                    Disponibilidade = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    HorarioFuncionamento = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4")
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_servicos", x => x.Id);
+                })
+                .Annotation("MySql:CharSet", "utf8mb4");
+
+            migrationBuilder.CreateTable(
+                name: "avaliacoes",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Descricao = table.Column<string>(type: "longtext", nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Estrelas = table.Column<int>(type: "int", nullable: false),
+                    ClienteId = table.Column<int>(type: "int", nullable: false),
+                    HotelId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_avaliacoes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_reservas_clientes_ClienteId",
-                        column: x => x.ClienteId,
-                        principalTable: "clientes",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_reservas_quartos_QuartoId",
-                        column: x => x.QuartoId,
-                        principalTable: "quartos",
+                        name: "FK_avaliacoes_hoteis_HotelId",
+                        column: x => x.HotelId,
+                        principalTable: "hoteis",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateIndex(
-                name: "IX_quartos_HotelId",
-                table: "quartos",
+                name: "IX_avaliacoes_HotelId",
+                table: "avaliacoes",
                 column: "HotelId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_reservas_ClienteId",
-                table: "reservas",
-                column: "ClienteId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_reservas_QuartoId",
-                table: "reservas",
-                column: "QuartoId");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "reservas");
+                name: "avaliacoes");
 
             migrationBuilder.DropTable(
                 name: "clientes");
 
             migrationBuilder.DropTable(
                 name: "quartos");
+
+            migrationBuilder.DropTable(
+                name: "reservas");
+
+            migrationBuilder.DropTable(
+                name: "servicos");
 
             migrationBuilder.DropTable(
                 name: "hoteis");

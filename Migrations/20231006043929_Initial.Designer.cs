@@ -11,8 +11,8 @@ using UPHoteisAPI.Data;
 namespace UPHoteisAPI.Migrations
 {
     [DbContext(typeof(HotelAPIDbContext))]
-    [Migration("20231001235754_UpdatingDatabase")]
-    partial class UpdatingDatabase
+    [Migration("20231006043929_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -22,11 +22,45 @@ namespace UPHoteisAPI.Migrations
                 .HasAnnotation("ProductVersion", "7.0.11")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
+            modelBuilder.Entity("UPHoteisAPI.Models.Avaliacao", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<int>("ClienteId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<int>("Estrelas")
+                        .HasColumnType("int");
+
+                    b.Property<int>("HotelId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HotelId");
+
+                    b.ToTable("avaliacoes");
+                });
+
             modelBuilder.Entity("UPHoteisAPI.Models.Cliente", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
+
+                    b.Property<string>("Contato")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Cpf")
+                        .IsRequired()
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -35,13 +69,6 @@ namespace UPHoteisAPI.Migrations
                     b.Property<string>("Nome")
                         .IsRequired()
                         .HasColumnType("longtext");
-
-                    b.Property<string>("Reservas")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<int>("Telefone")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -54,7 +81,11 @@ namespace UPHoteisAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Descricao")
+                    b.Property<string>("Cnpj")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Contato")
                         .IsRequired()
                         .HasColumnType("longtext");
 
@@ -62,8 +93,8 @@ namespace UPHoteisAPI.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<int>("Estrelas")
-                        .HasColumnType("int");
+                    b.Property<double>("MediaEstrelas")
+                        .HasColumnType("double");
 
                     b.Property<string>("Nome")
                         .IsRequired()
@@ -80,17 +111,21 @@ namespace UPHoteisAPI.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
                     b.Property<bool>("Disponibilidade")
                         .HasColumnType("tinyint(1)");
+
+                    b.Property<int>("HotelId")
+                        .HasColumnType("int");
 
                     b.Property<int>("Numero")
                         .HasColumnType("int");
 
-                    b.Property<double>("PrecoDiaria")
+                    b.Property<double>("ValorDiaria")
                         .HasColumnType("double");
-
-                    b.Property<int>("QuantidadePessoas")
-                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -112,45 +147,54 @@ namespace UPHoteisAPI.Migrations
                     b.Property<int>("ClienteId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("EstaConfirmada")
-                        .HasColumnType("tinyint(1)");
-
-                    b.Property<string>("NomeCliente")
-                        .IsRequired()
-                        .HasColumnType("longtext");
-
-                    b.Property<double>("PrecoTotal")
-                        .HasColumnType("double");
-
                     b.Property<int>("QuartoId")
                         .HasColumnType("int");
 
+                    b.Property<double>("ValorTotal")
+                        .HasColumnType("double");
+
                     b.HasKey("Id");
-
-                    b.HasIndex("ClienteId");
-
-                    b.HasIndex("QuartoId");
 
                     b.ToTable("reservas");
                 });
 
-            modelBuilder.Entity("UPHoteisAPI.Models.Reserva", b =>
+            modelBuilder.Entity("UPHoteisAPI.Models.Servico", b =>
                 {
-                    b.HasOne("UPHoteisAPI.Models.Cliente", "Cliente")
-                        .WithMany()
-                        .HasForeignKey("ClienteId")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Disponibilidade")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<string>("HorarioFuncionamento")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<decimal>("Preco")
+                        .HasColumnType("decimal(65,30)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("servicos");
+                });
+
+            modelBuilder.Entity("UPHoteisAPI.Models.Avaliacao", b =>
+                {
+                    b.HasOne("UPHoteisAPI.Models.Hotel", null)
+                        .WithMany("Avaliacoes")
+                        .HasForeignKey("HotelId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
 
-                    b.HasOne("UPHoteisAPI.Models.Quarto", "Quarto")
-                        .WithMany()
-                        .HasForeignKey("QuartoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Cliente");
-
-                    b.Navigation("Quarto");
+            modelBuilder.Entity("UPHoteisAPI.Models.Hotel", b =>
+                {
+                    b.Navigation("Avaliacoes");
                 });
 #pragma warning restore 612, 618
         }
