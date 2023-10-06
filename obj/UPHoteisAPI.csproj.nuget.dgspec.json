@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "D:\\_src\\UPHoteisAPI\\UPHoteisAPI.csproj": {}
+    "C:\\_src\\UPHoteisAPI\\UPHoteisAPI.csproj": {}
   },
   "projects": {
-    "D:\\_src\\UPHoteisAPI\\UPHoteisAPI.csproj": {
+    "C:\\_src\\UPHoteisAPI\\UPHoteisAPI.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\_src\\UPHoteisAPI\\UPHoteisAPI.csproj",
+        "projectUniqueName": "C:\\_src\\UPHoteisAPI\\UPHoteisAPI.csproj",
         "projectName": "UPHoteisAPI",
-        "projectPath": "D:\\_src\\UPHoteisAPI\\UPHoteisAPI.csproj",
-        "packagesPath": "C:\\Users\\Padrão\\.nuget\\packages\\",
-        "outputPath": "D:\\_src\\UPHoteisAPI\\obj\\",
+        "projectPath": "C:\\_src\\UPHoteisAPI\\UPHoteisAPI.csproj",
+        "packagesPath": "C:\\Users\\marce\\.nuget\\packages\\",
+        "outputPath": "C:\\_src\\UPHoteisAPI\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\Padrão\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\marce\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
