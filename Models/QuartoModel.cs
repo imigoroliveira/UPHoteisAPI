@@ -10,6 +10,8 @@ namespace UPHoteisAPI.Models
         [Required]
         public int Numero { get; set;}
         [Required]
+        public string TipoQuarto { get; set; }
+        [Required]
         public string? Tamanho { get; set; }
         [Required]
         public string? Descricao { get; set; }
