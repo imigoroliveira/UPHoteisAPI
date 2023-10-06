@@ -3,6 +3,8 @@ using System.ComponentModel.DataAnnotations;
 
 namespace UPHoteisAPI.Models
 {
+    // CreatedByChatGPT
+
     public class Avaliacao
     {
         [Key]

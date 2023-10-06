@@ -13,10 +13,16 @@ public class ReservaService
 
     public async Task CadastrarReservaAsync(Reserva reserva)
     {
+        var quarto = await _hotelAPIDbContext.quartos.FindAsync(reserva.QuartoId);
+
+        if (quarto != null)
+        {
+            quarto.Disponibilidade = false;
+            _hotelAPIDbContext.quartos.Update(quarto); 
+        }
         await _hotelAPIDbContext.reservas.AddAsync(reserva);
         await _hotelAPIDbContext.SaveChangesAsync();
     }
-
     public async Task<IEnumerable<Reserva>> ListarReservasAsync()
     {
         return await _hotelAPIDbContext.reservas.ToListAsync();

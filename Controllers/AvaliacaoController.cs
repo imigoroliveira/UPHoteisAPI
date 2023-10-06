@@ -2,6 +2,9 @@
 using UPHoteisAPI.Models;
 using UPHoteisAPI.Services;
 
+//CreatedByChatGPT
+
+
 [ApiController]
 [Route("[controller]")]
 public class AvaliacaoController : ControllerBase

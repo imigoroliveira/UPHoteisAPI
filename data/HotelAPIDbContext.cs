@@ -16,4 +16,7 @@ using Microsoft.EntityFrameworkCore;
         public DbSet<Hotel> hoteis { get; set; }
 
         public DbSet<Avaliacao> avaliacoes { get; set; }
+
+        public DbSet<Servico> servicos { get; set; }
+
 }
