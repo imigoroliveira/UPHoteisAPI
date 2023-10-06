@@ -1,15 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using UPHoteisAPI.Models;
 using UPHoteisAPI.Services;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 [ApiController]
 [Route("[controller]")]
 public class ServicoController : ControllerBase
 {
-    private ServicoService _servicoService;
+    private readonly ServicoService _servicoService;
 
     public ServicoController(ServicoService servicoService)
     {
@@ -19,13 +16,9 @@ public class ServicoController : ControllerBase
     // POST: Servico/cadastrar
     [HttpPost]
     [Route("cadastrar")]
-    public async Task<ActionResult<Servico>> Cadastrar(Servico servico)
+    public async Task<ActionResult<ServicoQuarto>> Cadastrar(ServicoQuarto servico)
     {
-        if (servico == null)
-        {
-            return BadRequest("Dados do serviço inválidos.");
-        }
-
+        
         await _servicoService.CadastrarServicoAsync(servico);
 
         return Created("", servico);
@@ -34,7 +27,7 @@ public class ServicoController : ControllerBase
     // GET: Servico/listar
     [HttpGet]
     [Route("listar")]
-    public async Task<ActionResult<IEnumerable<Servico>>> Listar()
+    public async Task<ActionResult<IEnumerable<ServicoQuarto>>> Listar()
     {
         var servicos = await _servicoService.ListarServicosAsync();
 
@@ -44,7 +37,7 @@ public class ServicoController : ControllerBase
     // GET: Servico/buscar/{id}
     [HttpGet]
     [Route("buscar/{id}")]
-    public async Task<ActionResult<Servico>> Buscar(int id)
+    public async Task<ActionResult<ServicoQuarto>> Buscar(int id)
     {
         var servico = await _servicoService.BuscarServicoAsync(id);
 
@@ -59,7 +52,7 @@ public class ServicoController : ControllerBase
     // PUT: Servico/alterar
     [HttpPut]
     [Route("alterar")]
-    public async Task<ActionResult> Alterar(Servico servico)
+    public async Task<ActionResult> Alterar(ServicoQuarto servico)
     {
         await _servicoService.AlterarServicoAsync(servico);
 

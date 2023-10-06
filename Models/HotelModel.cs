@@ -14,10 +14,9 @@ namespace UPHoteisAPI.Models
         public string? Endereco { get; set; }
         [Required]
         public string? Contato { get; set; }
-        public double MediaEstrelas { get; set; }
-        
-        // Avaliações relacionadas a este hotel
+        public double MediaAvaliacoes { get; set; }
+
         public List<Avaliacao>? Avaliacoes { get; set; }
-        
+
     }
 }

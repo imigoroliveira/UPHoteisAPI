@@ -2,14 +2,11 @@
 using UPHoteisAPI.Models;
 using UPHoteisAPI.Services;
 
-//CreatedByChatGPT
-
-
 [ApiController]
 [Route("[controller]")]
 public class AvaliacaoController : ControllerBase
 {
-    private AvaliacaoService _avaliacaoService;
+    private readonly AvaliacaoService _avaliacaoService;
 
     public AvaliacaoController(AvaliacaoService avaliacaoService)
     {
@@ -22,11 +19,6 @@ public class AvaliacaoController : ControllerBase
     [Route("cadastrar")]
     public async Task<ActionResult<Avaliacao>> Cadastrar(Avaliacao avaliacao)
     {
-        if (avaliacao == null)
-        {
-            return BadRequest("Dados de avaliação inválidos.");
-        }
-
         await _avaliacaoService.CadastrarAvaliacaoAsync(avaliacao);
 
         return Created("", avaliacao);

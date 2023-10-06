@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using UPHoteisAPI.Data;
 
@@ -10,9 +11,11 @@ using UPHoteisAPI.Data;
 namespace UPHoteisAPI.Migrations
 {
     [DbContext(typeof(HotelAPIDbContext))]
-    partial class HotelAPIDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231006224159_InitialCreate")]
+    partial class InitialCreate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -6,7 +6,7 @@ namespace UPHoteisAPI.Services
 {
     public class AvaliacaoService
     {
-        private HotelAPIDbContext _hotelAPIDbContext;
+        private readonly HotelAPIDbContext _hotelAPIDbContext;
 
         public AvaliacaoService(HotelAPIDbContext hotelAPIDbContext)
         {
@@ -15,33 +15,38 @@ namespace UPHoteisAPI.Services
 
         public async Task CadastrarAvaliacaoAsync(Avaliacao avaliacoes)
         {
-            await _hotelAPIDbContext.avaliacoes.AddAsync(avaliacoes);
+            await _hotelAPIDbContext.Avaliacoes.AddAsync(avaliacoes);
             await _hotelAPIDbContext.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<Avaliacao>> ListarAvaliacoesAsync()
         {
-            return await _hotelAPIDbContext.avaliacoes.ToListAsync();
+            return await _hotelAPIDbContext.Avaliacoes.ToListAsync();
         }
 
         public async Task<Avaliacao> BuscarAvaliacaoAsync(int id)
         {
-            return await _hotelAPIDbContext.avaliacoes.FindAsync(id);
+            return await _hotelAPIDbContext.Avaliacoes.FindAsync(id);
         }
 
         public async Task AlterarAvaliacaoAsync(Avaliacao avaliacao)
         {
-            var avaliacaoAtual = await _hotelAPIDbContext.avaliacoes.FindAsync(avaliacao.Id);
-   
-            avaliacaoAtual.Estrelas = avaliacao.Estrelas;
+            var avaliacaoAnterior = await _hotelAPIDbContext.Avaliacoes.FindAsync(avaliacao.Id);
 
-            _hotelAPIDbContext.avaliacoes.Update(avaliacaoAtual);
+            avaliacaoAnterior.NotaAvaliacao = avaliacao.NotaAvaliacao;
+
+            _hotelAPIDbContext.Avaliacoes.Update(avaliacaoAnterior);
 
             await _hotelAPIDbContext.SaveChangesAsync();
 
-            if (avaliacaoAtual != null)
+            if (avaliacaoAnterior.NotaAvaliacao != avaliacao.NotaAvaliacao)
             {
-                var hotelId = avaliacaoAtual.HotelId;
+                avaliacaoAnterior.NotaAvaliacao = avaliacao.NotaAvaliacao;
+                _hotelAPIDbContext.Avaliacoes.Update(avaliacaoAnterior);
+
+                await _hotelAPIDbContext.SaveChangesAsync();
+
+                var hotelId = avaliacaoAnterior.HotelId;
                 AtualizarMediaEstrelas(hotelId);
             }
 
@@ -49,24 +54,24 @@ namespace UPHoteisAPI.Services
 
         public async Task ExcluirAvaliacaoAsync(int id)
         {
-            var avaliacao = await _hotelAPIDbContext.avaliacoes.FindAsync(id);
+            var avaliacao = await _hotelAPIDbContext.Avaliacoes.FindAsync(id);
 
-            _hotelAPIDbContext.avaliacoes.Remove(avaliacao);
+            _hotelAPIDbContext.Avaliacoes.Remove(avaliacao);
             await _hotelAPIDbContext.SaveChangesAsync();
         }
 
         protected void AtualizarMediaEstrelas(int hotelId)
         {
-            var hotel = _hotelAPIDbContext.hoteis
+            var hotel = _hotelAPIDbContext.Hoteis
                 .Include(h => h.Avaliacoes)
                 .FirstOrDefault(h => h.Id == hotelId);
 
-            double mediaEstrelas = hotel.Avaliacoes.Average(av => av.Estrelas);
+            double mediaEstrelas = hotel.Avaliacoes.Average(av => av.NotaAvaliacao);
             double media = (mediaEstrelas / 5.0) * 5.0;
 
-            hotel.MediaEstrelas = media;
+            hotel.MediaAvaliacoes = media;
 
-            _hotelAPIDbContext.hoteis.Update(hotel);
+            _hotelAPIDbContext.Hoteis.Update(hotel);
             _hotelAPIDbContext.SaveChanges();
         }
 

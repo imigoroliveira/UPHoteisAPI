@@ -15,12 +15,14 @@ builder.Services.AddDbContext<HotelAPIDbContext>(option => option.UseMySql(
 );
 
 builder.Services.AddControllers();
+
 builder.Services.AddScoped <ClienteService>();
 builder.Services.AddScoped <HotelService>();
 builder.Services.AddScoped <QuartoService>();
 builder.Services.AddScoped <QuartoService>();
 builder.Services.AddScoped <ReservaService>();
 builder.Services.AddScoped <AvaliacaoService>();
+builder.Services.AddScoped <ServicoService>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
