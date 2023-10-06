@@ -7,18 +7,17 @@ namespace UPHoteisAPI.Models
     {
         [Key]
         public int Id { get; set; }
-
-        [Required]
-        public bool Disponibilidade { get; set; }
-
-        [Required]
-        public int QuantidadePessoas { get; set; }
-
         [Required]
         public int Numero { get; set;}
-
         [Required]
-        public double PrecoDiaria { get; set; }
+        public string? Tamanho { get; set; }
+        [Required]
+        public string? Descricao { get; set; }
+        [Required]
+        public double ValorDiaria { get; set; }
+        public bool Disponibilidade { get; set; }
+        public int HotelId { get; set; }
+        public Hotel? Hotel { get; set; }
         
     }
 }
