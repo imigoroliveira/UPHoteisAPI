@@ -2,47 +2,49 @@
 using UPHoteisAPI.Data;
 using UPHoteisAPI.Models;
 
-public class QuartoService
+namespace UPHoteisAPI.Services
 {
-    private HotelAPIDbContext _hotelAPIDbContext;
-
-    public QuartoService(HotelAPIDbContext hotelAPIDbContext)
+    public class QuartoService
     {
-        _hotelAPIDbContext = hotelAPIDbContext;
-    }
+        private readonly HotelAPIDbContext _hotelAPIDbContext;
 
-    public async Task CadastrarQuartoAsync(Quarto quarto)
-    {
-        await _hotelAPIDbContext.quartos.AddAsync(quarto);
-        await _hotelAPIDbContext.SaveChangesAsync();
-    }
+        public QuartoService(HotelAPIDbContext hotelAPIDbContext)
+        {
+            _hotelAPIDbContext = hotelAPIDbContext;
+        }
 
-    public async Task<IEnumerable<Quarto>> ListarQuartosAsync()
-    {
-        return await _hotelAPIDbContext.quartos.ToListAsync();
-    }
+        public async Task CadastrarQuartoAsync(Quarto quarto)
+        {
+            await _hotelAPIDbContext.Quartos.AddAsync(quarto);
+            await _hotelAPIDbContext.SaveChangesAsync();
+        }
 
-    public async Task<Quarto> BuscarQuartoAsync(int id)
-    {
-        return await _hotelAPIDbContext.quartos.FindAsync(id);
-    }
+        public async Task<IEnumerable<Quarto>> ListarQuartosAsync()
+        {
+            return await _hotelAPIDbContext.Quartos.ToListAsync();
+        }
 
-    public async Task AlterarQuartoAsync(Quarto quarto)
-    {
-        var quartoExistente = await _hotelAPIDbContext.quartos.FindAsync(quarto.Id);
+        public async Task<Quarto> BuscarQuartoAsync(int id)
+        {
+            return await _hotelAPIDbContext.Quartos.FindAsync(id);
+        }
 
-        quartoExistente.Numero = quarto.Numero;
-        quartoExistente.TipoQuarto = quarto.TipoQuarto;
+        public async Task AlterarQuartoAsync(Quarto quarto)
+        {
+            var quartoExistente = await _hotelAPIDbContext.Quartos.FindAsync(quarto.Id);
 
-        _hotelAPIDbContext.quartos.Update(quartoExistente);
-        await _hotelAPIDbContext.SaveChangesAsync();
-    }
+            quartoExistente.Numero = quarto.Numero;
 
-    public async Task ExcluirQuartoAsync(int id)
-    {
-        var quarto = await _hotelAPIDbContext.quartos.FindAsync(id);
+            _hotelAPIDbContext.Quartos.Update(quartoExistente);
+            await _hotelAPIDbContext.SaveChangesAsync();
+        }
 
-        _hotelAPIDbContext.quartos.Remove(quarto);
-        await _hotelAPIDbContext.SaveChangesAsync();
+        public async Task ExcluirQuartoAsync(int id)
+        {
+            var quarto = await _hotelAPIDbContext.Quartos.FindAsync(id);
+
+            _hotelAPIDbContext.Quartos.Remove(quarto);
+            await _hotelAPIDbContext.SaveChangesAsync();
+        }
     }
 }

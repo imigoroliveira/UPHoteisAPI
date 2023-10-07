@@ -6,7 +6,7 @@ namespace UPHoteisAPI.Services
 {
     public class HotelService
     {
-        private HotelAPIDbContext _hotelAPIDbContext;
+        private readonly HotelAPIDbContext _hotelAPIDbContext;
 
         public HotelService(HotelAPIDbContext hotelAPIDbContext)
         {
@@ -15,35 +15,38 @@ namespace UPHoteisAPI.Services
 
         public async Task CadastrarHotelAsync(Hotel hotel)
         {
-            await _hotelAPIDbContext.hoteis.AddAsync(hotel);
+            await _hotelAPIDbContext.Hoteis.AddAsync(hotel);
             await _hotelAPIDbContext.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<Hotel>> ListarHoteisAsync()
         {
-            return await _hotelAPIDbContext.hoteis.ToListAsync();
+            return await _hotelAPIDbContext.Hoteis.ToListAsync();
         }
 
         public async Task<Hotel> BuscarHotelAsync(int id)
         {
-            return await _hotelAPIDbContext.hoteis.FindAsync(id);
+            return await _hotelAPIDbContext.Hoteis.FindAsync(id);
         }
 
         public async Task AlterarHotelAsync(Hotel hotel)
         {
-            var hotelExistente = await _hotelAPIDbContext.hoteis.FindAsync(hotel.Id);
+            var hotelExistente = await _hotelAPIDbContext.Hoteis.FindAsync(hotel.Id);
 
             hotelExistente.Nome = hotel.Nome;
+            hotelExistente.Cnpj = hotel.Cnpj;
+            hotelExistente.Endereco = hotel.Endereco;
+            hotelExistente.Contato = hotel.Contato;
 
-            _hotelAPIDbContext.hoteis.Update(hotelExistente);
+            _hotelAPIDbContext.Hoteis.Update(hotelExistente);
             await _hotelAPIDbContext.SaveChangesAsync();
         }
 
         public async Task ExcluirHotelAsync(int id)
         {
-            var hotel = await _hotelAPIDbContext.hoteis.FindAsync(id);
+            var hotel = await _hotelAPIDbContext.Hoteis.FindAsync(id);
 
-            _hotelAPIDbContext.hoteis.Remove(hotel);
+            _hotelAPIDbContext.Hoteis.Remove(hotel);
             await _hotelAPIDbContext.SaveChangesAsync();
         }
     }

@@ -3,21 +3,20 @@ using System.ComponentModel.DataAnnotations;
 
 namespace UPHoteisAPI.Models
 {
-    // CreatedByChatGPT
-
     public class Avaliacao
     {
         [Key]
         public int Id { get; set; }
-
-        public string Descricao { get; set; }
-
         [Required]
-        public int Estrelas { get; set; }
+        public string? Comentario { get; set; }
+        [Required]
+        public int NotaAvaliacao { get; set; }
 
         public int ClienteId { get; set; }
+        public Cliente? Cliente { get; set; }
 
         public int HotelId { get; set; }
+        public Hotel? Hotel { get; set; }
 
     }
 }

@@ -6,7 +6,7 @@ using UPHoteisAPI.Services;
 [Route("[controller]")]
 public class QuartoController : ControllerBase
 {
-    private QuartoService _quartoService;
+    private readonly QuartoService _quartoService;
 
     public QuartoController(QuartoService quartoService)
     {
@@ -17,11 +17,7 @@ public class QuartoController : ControllerBase
     [Route("cadastrar")]
     public async Task<ActionResult<Hotel>> Cadastrar(Quarto quarto)
     {
-        if (quarto == null)
-        {
-            return BadRequest("Dados de Quartos inválidos.");
-        }
-
+        
         await _quartoService.CadastrarQuartoAsync(quarto);
 
         return Created("", quarto);

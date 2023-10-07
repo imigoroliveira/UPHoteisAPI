@@ -1,47 +1,44 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using UPHoteisAPI.Data;
 using UPHoteisAPI.Models;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace UPHoteisAPI.Services
 {
     public class ServicoService
     {
-        private HotelAPIDbContext _hotelAPIDbContext;
+        private readonly HotelAPIDbContext _hotelAPIDbContext;
 
         public ServicoService(HotelAPIDbContext hotelAPIDbContext)
         {
             _hotelAPIDbContext = hotelAPIDbContext;
         }
 
-        public async Task CadastrarServicoAsync(Servico servico)
+        public async Task CadastrarServicoAsync(ServicoQuarto servico)
         {
-            await _hotelAPIDbContext.servicos.AddAsync(servico);
+            await _hotelAPIDbContext.Servicos.AddAsync(servico);
             await _hotelAPIDbContext.SaveChangesAsync();
         }
 
-        public async Task<IEnumerable<Servico>> ListarServicosAsync()
+        public async Task<IEnumerable<ServicoQuarto>> ListarServicosAsync()
         {
-            return await _hotelAPIDbContext.servicos.ToListAsync();
+            return await _hotelAPIDbContext.Servicos.ToListAsync();
         }
 
-        public async Task<Servico> BuscarServicoAsync(int id)
+        public async Task<ServicoQuarto> BuscarServicoAsync(int id)
         {
-            return await _hotelAPIDbContext.servicos.FindAsync(id);
+            return await _hotelAPIDbContext.Servicos.FindAsync(id);
         }
 
-        public async Task AlterarServicoAsync(Servico servico)
+        public async Task AlterarServicoAsync(ServicoQuarto servico)
         {
-            var servicoAtual = await _hotelAPIDbContext.servicos.FindAsync(servico.Id);
+            var servicoAtual = await _hotelAPIDbContext.Servicos.FindAsync(servico.Id);
 
             if (servicoAtual != null)
             {
-                // Atualize os campos do serviço conforme necessário
                 servicoAtual.Nome = servico.Nome;
-                servicoAtual.Preco = servico.Preco;
+                servicoAtual.ValorServico = servico.ValorServico;
                 servicoAtual.Disponibilidade = servico.Disponibilidade;
-                servicoAtual.HorarioFuncionamento = servico.HorarioFuncionamento;
+                servicoAtual.Horario = servico.Horario;
 
                 await _hotelAPIDbContext.SaveChangesAsync();
             }
@@ -49,11 +46,11 @@ namespace UPHoteisAPI.Services
 
         public async Task ExcluirServicoAsync(int id)
         {
-            var servico = await _hotelAPIDbContext.servicos.FindAsync(id);
+            var servico = await _hotelAPIDbContext.Servicos.FindAsync(id);
 
             if (servico != null)
             {
-                _hotelAPIDbContext.servicos.Remove(servico);
+                _hotelAPIDbContext.Servicos.Remove(servico);
                 await _hotelAPIDbContext.SaveChangesAsync();
             }
         }

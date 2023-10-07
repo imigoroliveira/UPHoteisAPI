@@ -17,5 +17,9 @@ namespace UPHoteisAPI.Models
         [Required]
         public string? Contato { get; set; }
 
+        // Lista de reservas e avaliações relacionadas a este cliente
+        public List<Reserva>? Reservas { get; set; }
+        public List<Avaliacao>? Avaliacoes { get; set; }
+
     }
 }

@@ -1,5 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace UPHoteisAPI.Models
 {
@@ -7,17 +6,19 @@ namespace UPHoteisAPI.Models
     {
         [Key]
         public int Id { get; set; }
-        
         [Required]
-        public int Numero { get; set;}
-        
+        public string? Numero { get; set; }
         [Required]
-        public string Descricao { get; set; }
-
+        public string? Tamanho { get; set; }
         [Required]
         public double ValorDiaria { get; set; }
+        [Required]
         public bool Disponibilidade { get; set; }
+
         public int HotelId { get; set; }
-        
+        public Hotel? Hotel { get; set; }
+
+        public List<Reserva>? Reservas { get; set; }
+
     }
 }

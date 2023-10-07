@@ -6,7 +6,7 @@ using UPHoteisAPI.Services;
 [Route("[controller]")]
 public class ClienteController : ControllerBase
 {
-    private ClienteService _clienteService;
+    private readonly ClienteService _clienteService;
 
     public ClienteController(ClienteService clienteService)
     {
@@ -18,11 +18,6 @@ public class ClienteController : ControllerBase
     [Route("cadastrar")]
     public async Task<ActionResult<Cliente>> Cadastrar(Cliente cliente)
     {
-        if (cliente == null)
-        {
-            return BadRequest("Dados de cliente inválidos.");
-        }
-
         await _clienteService.CadastrarClienteAsync(cliente);
 
         return Created("", cliente);

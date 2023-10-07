@@ -1,11 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
 using UPHoteisAPI.Models;
+using UPHoteisAPI.Services;
 
 [ApiController]
 [Route("[controller]")]
 public class ReservaController : ControllerBase
 {
-    private ReservaService _reservaHotelService;
+    private readonly ReservaService _reservaHotelService;
 
     public ReservaController(ReservaService reservaHotelService)
     {
@@ -17,11 +18,7 @@ public class ReservaController : ControllerBase
     [Route("cadastrar")]
     public async Task<ActionResult<Reserva>> Cadastrar(Reserva reserva)
     {
-        if (reserva == null)
-        {
-            return BadRequest("Dados de reserva inválidos.");
-        }
-
+        
         await _reservaHotelService.CadastrarReservaAsync(reserva);
 
         return Created("", reserva);
