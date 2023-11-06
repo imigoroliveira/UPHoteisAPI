@@ -15,7 +15,7 @@ builder.Services.AddDbContext<HotelAPIDbContext>(option => option.UseMySql(
 );
 
 builder.Services.AddControllers();
-
+builder.Services.AddCors();
 builder.Services.AddScoped <ClienteService>();
 builder.Services.AddScoped <HotelService>();
 builder.Services.AddScoped <QuartoService>();
@@ -38,7 +38,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseCors(opcoes => opcoes.AllowAnyOrigin().AllowAnyHeader());
 app.UseAuthorization();
 
 app.MapControllers();
